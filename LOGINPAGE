@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .tabs {
+            display: flex;
+            background: #f0f2f5;
+        }
+        .tabs button {
+            flex: 1;
+            padding: 1em;
+            border: none;
+            background: #ffffff;
+            cursor: pointer;
+            font-size: 1em;
+            color: #555;
+            border-bottom: 2px solid transparent;
+        }
+        .tabs button.active {
+            background: #ffffff;
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+        }
+        .form-container {
+            padding: 2em;
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 1em;
+        }
+        .form-group {
+            margin-bottom: 1em;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.75em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 0.75em;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: #ffffff;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background: #0056b3;
+        }
+        .toggle-link {
+            text-align: center;
+            margin-top: 1em;
+        }
+        .toggle-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .toggle-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-button active" onclick="showForm('login')">Login</button>
+            <button class="tab-button" onclick="showForm('signup')">Sign Up</button>
+        </div>
+        <div class="form-container">
+            <!-- Login Form -->
+            <div id="login-form" class="form-content">
+                <h2>Login</h2>
+                <form action="/login" method="post">
+                    <div class="form-group">
+                        <label for="login-email">Email:</label>
+                        <input type="email" id="login-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password:</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Login</button>
+                    </div>
+                    <div class="toggle-link">
+                        <p>Don't have an account? <a href="#" onclick="showForm('signup')">Sign Up</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="form-content" style="display: none;">
+                <h2>Sign Up</h2>
+                <form action="/signup" method="post">
+                    <div class="form-group">
+                        <label for="signup-email">Email:</label>
+                        <input type="email" id="signup-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password:</label>
+                        <input type="password" id="signup-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm-password">Confirm Password:</label>
+                        <input type="password" id="signup-confirm-password" name="confirm_password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Sign Up</button>
+                    </div>
+                    <div class="toggle-link">
+                        <p>Already have an account? <a href="#" onclick="showForm('login')">Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showForm(formType) {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            
+            if (formType === 'login') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+                tabButtons[0].classList.add('active');
+                tabButtons[1].classList.remove('active');
+            } else if (formType === 'signup') {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+                tabButtons[0].classList.remove('active');
+                tabButtons[1].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
